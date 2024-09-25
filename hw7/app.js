@@ -1,8 +1,3 @@
-// URL(UNI) - Unified Resource Locator(Identier)
-// HTTP(S) - Hyper Text Transfer Protocol (secured)
-// Parsing html+css=>dom(+rendering)
-// executing js<=v8
-
 let originalArray = [1500, 400, 800, 750, 8000, 250, 150, 640, 100, 370];
 
 function buildArrayItem(value) {
@@ -55,22 +50,5 @@ document.addEventListener("click", function (event) {
       }
     });
     renderArray([updatedArray], $updatedArray);
-  }else if (action === "slice top 3") {
-    let updatedArray = originalArray.slice(0, 3);
-    renderArray(updatedArray, $updatedArray);
-  } else if (action === "slice last 4") {
-    let updatedArray = originalArray.slice(-4);
-    renderArray(updatedArray, $updatedArray);
-  } else if (action === "sort ascending") {
-    let[...originalArrayCopy] = [...originalArray]
-
-    let updatedArray = originalArrayCopy.sort((a, b) => a-b
-    );
-    renderArray(updatedArray, $updatedArray);
-  } else if (action === "sort descending") {
-    let[...originalArrayCopy] = [...originalArray]
-    
-    let updatedArray = originalArrayCopy.sort((a, b) => b-a);
-    renderArray(updatedArray, $updatedArray);
   }
 });
