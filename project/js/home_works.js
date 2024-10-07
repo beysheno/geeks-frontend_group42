@@ -18,17 +18,95 @@ gmailButton.onclick = () => {
 
 // home work Part 2: MoveBlock
 
+// const parentBlock = document.querySelector(".parent_block");
+// const childBlock = document.querySelector(".child_block");
+
+// let posX = 0;
+// const offsetWidth = parentBlock.offsetWidth - childBlock.offsetWidth;
+
+// const moveblock = () => {
+//   if (posX < offsetWidth) {
+//     posX++;
+//     childBlock.style.left = `${posX}px`;
+//     requestAnimationFrame(moveblock);
+//   }
+// };
+// moveblock();
+
+//home work Part 1: MoveBlock
 const parentBlock = document.querySelector(".parent_block");
 const childBlock = document.querySelector(".child_block");
 
-let posX = 0;
 const offsetWidth = parentBlock.offsetWidth - childBlock.offsetWidth;
+const offsetHeight = parentBlock.offsetHeight - childBlock.offsetHeight;
+
+let posX = 0;
+let posY = 0;
+let direction = "right";
 
 const moveblock = () => {
-  if (posX < offsetWidth) {
+  if (direction === "right" && posX < offsetWidth) {
     posX++;
     childBlock.style.left = `${posX}px`;
-    requestAnimationFrame(moveblock);
+  } else if (direction === "right" && posX >= offsetWidth) {
+    direction = "down";
+  }
+
+  if (direction === "down" && posY < offsetHeight) {
+    posY++;
+    childBlock.style.top = `${posY}px`;
+  } else if (direction === "down" && posY >= offsetHeight) {
+    direction = "left";
+  }
+
+  if (direction === "left" && posX > 0) {
+    posX--;
+    childBlock.style.left = `${posX}px`;
+  } else if (direction === "left" && posX <= 0) {
+    direction = "up";
+  }
+
+  if (direction === "up" && posY > 0) {
+    posY--;
+    childBlock.style.top = `${posY}px`;
+  } else if (direction === "up" && posY <= 0) {
+    direction = "right";
+  }
+
+  requestAnimationFrame(moveblock);
+};
+
+moveblock();
+
+// home work Part 2: stopwatch
+
+const timerDisplay = document.querySelector("#seconds");
+const startButton = document.querySelector("#start");
+const stopButton = document.querySelector("#stop");
+const resetButton = document.querySelector("#reset");
+
+let seconds = 0;
+let timerInterval;
+updateDisplay = () => {
+  timerDisplay.innerHTML = seconds;
+};
+startButton.onclick = () => {
+  if (!timerInterval) {
+    timerInterval = setInterval(() => {
+      seconds++;
+      updateDisplay();
+    }, 1000);
   }
 };
-moveblock();
+
+stopButton.onclick = () => {
+  clearInterval(timerInterval);
+  timerInterval = null;
+};
+resetButton.onclick = () => {
+  clearInterval(timerInterval);
+  timerInterval = null;
+  seconds = 0;
+  updateDisplay();
+};
+updateDisplay();
