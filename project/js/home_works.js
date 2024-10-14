@@ -110,3 +110,48 @@ resetButton.onclick = () => {
   updateDisplay();
 };
 updateDisplay();
+
+//characters
+const personBlock = document.querySelector(".characters-list");
+const userPhoto = "";
+getPersons = () => {
+  const request = new XMLHttpRequest();
+  request.open("GET", "../data/persons.json");
+  request.setRequestHeader("Content-Type", "application/json");
+  request.send();
+
+  request.onload = () => {
+    const data = JSON.parse(request.response);
+    Object.values(data).forEach((person) => {
+      const personCard = document.createElement("div");
+      personCard.setAttribute("className", "character-card");
+      personCard.innerHTML = `
+      <div class="character-photo"><img  src="${
+        person.photo || userPhoto
+      }" alt="${person.name}"></div>
+      
+      <div class="character-decription">
+      <h2>${person.name}</h2>
+      <p>Age: ${person.age}</p>
+      <p>Faculty: ${person.faculty}</p>
+      </div>
+      `;
+      personBlock.appendChild(personCard);
+    });
+  };
+};
+
+getPersons();
+//any.json
+getAnyChars = () => {
+  const request = new XMLHttpRequest();
+  request.open("GET", "../data/any.json");
+  request.setRequestHeader("Content-type", "application/json");
+  request.send();
+
+  request.onload = () => {
+    const data = JSON.parse(request.response);
+    console.log(data);
+  };
+};
+getAnyChars();
