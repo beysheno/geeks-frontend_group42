@@ -20,7 +20,8 @@ phoneButton.onclick = () => {
 const tabContentBlocks = document.querySelectorAll(".tab_content_block");
 const tabItems = document.querySelectorAll(".tab_content_item");
 const tabParent = document.querySelector(".tab_content_items");
-
+let currentTab = 0;
+let timer;
 const hideTabContent = () => {
   tabContentBlocks.forEach((item) => {
     item.style.display = "none";
@@ -33,21 +34,36 @@ const hideTabContent = () => {
 const showTabContent = (index = 0) => {
   tabContentBlocks[index].style.display = "block";
   tabItems[index].classList.add("tab_content_item_active");
+  currentTab = index;
+};
+const autoSwitchTab = () => {
+  timer = setTimeout(() => {
+    currentTab = (currentTab + 1) % tabItems.length;
+    hideTabContent();
+    showTabContent(currentTab);
+    autoSwitchTab();
+  }, 3000);
 };
 
-hideTabContent();
-showTabContent();
-
+const resetTimer1 = () => {
+  clearInterval(timer);
+  autoSwitchTab();
+};
 tabParent.onclick = (event) => {
   if (event.target.classList.contains("tab_content_item")) {
     tabItems.forEach((item, index) => {
       if (event.target === item) {
         hideTabContent();
         showTabContent(index);
+        resetTimer1();
       }
     });
   }
 };
+hideTabContent();
+showTabContent();
+autoSwitchTab();
+
 //converter
 
 const usdInput = document.querySelector("#usd");
