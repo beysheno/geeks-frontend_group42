@@ -93,6 +93,7 @@ const converter = (element, targetElement, targetElement2) => {
       }
       if (element.value === "") {
         targetElement.value = "";
+        targetElement2.value = "";
       }
     };
   };
@@ -103,3 +104,50 @@ converter(euroInput, usdInput, somInput);
 
 // DRY - Dont  repeat yourself
 // KISS - keep it simple, stupid || keep it super simple
+
+// Card Switcher
+
+const card = document.querySelector(".card");
+const prevButton = document.querySelector("#btn-prev");
+const nextButton = document.querySelector("#btn-next");
+let cardId = 1;
+
+const fetchRequest = () => {
+  fetch(`https://jsonplaceholder.typicode.com/todos/${cardId}`)
+    .then((response) => response.json())
+    .then((data) => {
+      const { id, title, completed } = data;
+      card.innerHTML = `
+      <p>${title}</p>
+      <p>${completed}</p>
+      <span>${id}</span>
+      `;
+    });
+};
+document.addEventListener("DOMContentLoaded", () => {
+  fetchRequest();
+});
+nextButton.onclick = () => {
+  if (cardId >= 200) {
+    cardId = 1;
+  } else {
+    cardId++;
+  }
+  fetchRequest();
+};
+
+prevButton.onclick = () => {
+  if (cardId <= 1) {
+    cardId = 200;
+  } else {
+    cardId--;
+  }
+  fetchRequest();
+};
+
+//hw part2
+
+const posts = fetch("https://jsonplaceholder.typicode.com/posts")
+  .then((response) => response.json())
+  .then((post) => console.log(post));
+
