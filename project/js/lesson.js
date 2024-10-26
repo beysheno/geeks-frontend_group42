@@ -71,14 +71,10 @@ const somInput = document.querySelector("#som");
 const euroInput = document.querySelector("#eur");
 
 const converter = (element, targetElement, targetElement2) => {
-  element.oninput = () => {
-    const request = new XMLHttpRequest();
-    request.open("GET", "../data/conventer.json");
-    request.setRequestHeader("Content-type", "application/json");
-    request.send();
-    request.onload = () => {
-      const data = JSON.parse(request.response);
-
+  element.oninput = async () => {
+    try {
+      const response = await fetch("../data/conventer.json");
+      const data = await response.json();
       if (element.id === "som") {
         targetElement.value = (element.value / data[0].usd).toFixed(2);
         targetElement2.value = (element.value / data[1].eur).toFixed(2);
@@ -95,7 +91,9 @@ const converter = (element, targetElement, targetElement2) => {
         targetElement.value = "";
         targetElement2.value = "";
       }
-    };
+    } catch (error) {
+      console.log(error);
+    }
   };
 };
 converter(usdInput, somInput, euroInput);
@@ -112,17 +110,21 @@ const prevButton = document.querySelector("#btn-prev");
 const nextButton = document.querySelector("#btn-next");
 let cardId = 1;
 
-const fetchRequest = () => {
-  fetch(`https://jsonplaceholder.typicode.com/todos/${cardId}`)
-    .then((response) => response.json())
-    .then((data) => {
-      const { id, title, completed } = data;
-      card.innerHTML = `
+const fetchRequest = async () => {
+  try {
+    const response = await fetch(
+      `https://jsonplaceholder.typicode.com/todos/${cardId}`
+    );
+    const data = await response.json();
+    const { id, title, completed } = data;
+    card.innerHTML = `
       <p>${title}</p>
       <p>${completed}</p>
       <span>${id}</span>
       `;
-    });
+  } catch (error) {
+    console.log(error);
+  }
 };
 document.addEventListener("DOMContentLoaded", () => {
   fetchRequest();
@@ -147,7 +149,31 @@ prevButton.onclick = () => {
 
 //hw part2
 
-const posts = fetch("https://jsonplaceholder.typicode.com/posts")
-  .then((response) => response.json())
-  .then((post) => console.log(post));
+// const posts = fetch("https://jsonplaceholder.typicode.com/posts")
+//   .then((response) => response.json())
+//   .then((post) => console.log(post));
 
+//weather app
+
+const searchInput = document.querySelector(".cityName");
+const city = document.querySelector(".city");
+const temp = document.querySelector(".temp");
+
+const API_KEY = "e417df62e04d3b1b111abeab19cea714";
+const BASE_URL = "http://api.openweathermap.org/data/2.5/weather";
+searchInput.oninput = async () => {
+  try {
+    const response = await fetch(
+      `${BASE_URL}?q=${searchInput.value}&appid=${API_KEY}&units=metric`
+    );
+    const data = await response.json();
+    city.innerHTML = data.name || "Город не найден";
+    temp.innerHTML = data.main?.temp
+      ? Math.round(data.main?.temp) + "&degC"
+      : "Температура не определена";
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+// query params
