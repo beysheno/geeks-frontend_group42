@@ -114,14 +114,10 @@ updateDisplay();
 //characters
 const personBlock = document.querySelector(".characters-list");
 const userPhoto = "";
-getPersons = () => {
-  const request = new XMLHttpRequest();
-  request.open("GET", "../data/persons.json");
-  request.setRequestHeader("Content-Type", "application/json");
-  request.send();
-
-  request.onload = () => {
-    const data = JSON.parse(request.response);
+getPersons = async () => {
+  try {
+    const response = await fetch("../data/persons.json");
+    const data = await response.json();
     Object.values(data).forEach((person) => {
       const personCard = document.createElement("div");
       personCard.setAttribute("className", "character-card");
@@ -138,20 +134,20 @@ getPersons = () => {
       `;
       personBlock.appendChild(personCard);
     });
-  };
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 getPersons();
 //any.json
-getAnyChars = () => {
-  const request = new XMLHttpRequest();
-  request.open("GET", "../data/any.json");
-  request.setRequestHeader("Content-type", "application/json");
-  request.send();
-
-  request.onload = () => {
-    const data = JSON.parse(request.response);
+getAnyChars = async () => {
+  try {
+    const response = await fetch("../data/any.json");
+    const data = await response.json();
     console.log(data);
-  };
+  } catch (error) {
+    console.log(error);
+  }
 };
 getAnyChars();
