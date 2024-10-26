@@ -11,7 +11,7 @@
 //   console.log(prev);
 
 //   setTimeout(() => {
-//     foo(curr, curr + prev);
+//     task2(curr, curr + prev);
 //   }, 1000);
 // };
 // task2();
