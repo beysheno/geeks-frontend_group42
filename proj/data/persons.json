@@ -1,0 +1,62 @@
+[
+  {
+    "name": "Harry Potter",
+    "age": 11,
+    "faculty": "Gryffindor",
+    "photo": "../images/img/harry.webp"
+  },
+  {
+    "name": "Hermione Granger",
+    "age": 11,
+    "faculty": "Gryffindor",
+    "photo": "../images/img/hermione.jpg"
+  },
+  {
+    "name": "Ron Weasley",
+    "age": 11,
+    "faculty": "Gryffindor",
+    "photo": "../images/img/ron.jpg"
+  },
+  {
+    "name": "Albus Dumbledore",
+    "age": 188,
+    "faculty": "Gryffindor",
+    "photo": "../images/img/Albus.webp"
+  },
+  {
+    "name": "Draco Malfoy",
+    "age": 11,
+    "faculty": "Slytherin",
+    "photo": "../images/img/draco.jpg"
+  },
+  {
+    "name": "Severus Snape",
+    "age": 31,
+    "faculty": "Slytherin",
+    "photo": "../images/img/snape.jpg"
+  },
+  {
+    "name": "Neville Longbottom",
+    "age": 11,
+    "faculty": "Gryffindor",
+    "photo": "../images/img/neville.jpg"
+  },
+  {
+    "name": "Luna Lovegood",
+    "age": 11,
+    "faculty": "Ravenclaw",
+    "photo": "../images/img/luna.jpg"
+  },
+  {
+    "name": "Cho Chang",
+    "age": 15,
+    "faculty": "Ravenclaw",
+    "photo": "../images/img/cho-chang.jpg"
+  },
+  {
+    "name": "Cedric Diggory",
+    "age": 17,
+    "faculty": "Hufflepuff",
+    "photo": "../images/img/cedric.webp"
+  }
+]

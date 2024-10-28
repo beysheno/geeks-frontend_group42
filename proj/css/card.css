@@ -1,0 +1,26 @@
+.cards {
+  background: var(--black);
+}
+.card_list {
+  padding: 100px 0;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+.card_post {
+  border: 2px solid white;
+  padding: 10px;
+  width: 350px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  text-align: center;
+}
+.card-title {
+  color: white;
+  font-size: 22px;
+}
+.card-body {
+  color: aliceblue;
+}
